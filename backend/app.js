@@ -6,9 +6,13 @@ const app = express();
 
 // importation de morgan (logger http)
 const morgan = require("morgan");
+
+
 app.use(morgan("dev"));
 
-// logger les requetes et les response
+//connection a la base de donné
+const db = require('./db/database')
+
 
 // app.use() route générale et la fonction middleware
 app.use((req, res, next) => {
