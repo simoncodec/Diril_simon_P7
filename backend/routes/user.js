@@ -10,8 +10,8 @@ const router = express.Router();
 
 // la route signup
 router.post("/", userController.signup);
-
 //la route login
+router.post("/", userController.login);
 
 
 

@@ -1,3 +1,4 @@
+//importation des modules et package
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const asyncLib = require('async');
@@ -114,4 +115,144 @@ exports.signup = async (req, res, next) => {
                 });
             }
         })
+};
+
+
+// -------- LOGIN -------- //
+exports.login = (req, res, next) => {
+    models.User.findOne({
+            where: {
+                email: req.body.email
+            }
+        })
+        .then(user => {
+            if (!user) {
+                return res.status(401).json({
+                    error: 'Utilisateur non trouvé !'
+                });
+            }
+            bcrypt.compare(req.body.password, user.password)
+                .then(valid => {
+                    if (!valid) {
+                        return res.status(401).json({
+                            error: 'Mot de passe erroné !'
+                        });
+                    }
+                    res.status(200).json({
+                        user: {
+                            username: user.username,
+                            email: user.email,
+                            department: user.department,
+                            isAdmin: user.isAdmin,
+                        },
+                        token: jwt.sign({
+                                userId: user.id
+                            },
+                            process.env.DB_TOKEN, {
+                                expiresIn: '12h'
+                            }
+                        )
+                    });
+                })
+                .catch(error => res.status(500).json({
+                    error
+                }));
+        })
+        .catch(error => res.status(500).json({
+            error
+        }));
+};
+
+// -------- UPDATE -------- //
+exports.updateUser = async (req, res, next) => {
+    // déclaration des paramètres nécessaires
+    const username = req.body.username;
+    const email = req.body.email;
+    const department = req.body.department;
+
+    asyncLib.waterfall([
+        // récupération de l'utilisateur dans la database
+        function (done) {
+            models.User.findOne({
+                    // where récupère les insfos de l'user
+                    attributes: ['id'],
+                    where: {
+                        id: req.params.id
+                    }
+                })
+                .then(function (userFound) {
+                    // l'utilisateur est retourné, on passe à la fonction suivante
+                    done(null, userFound);
+                })
+                .catch(function (err) {
+                    return res.status(500).json({
+                        error: 'impossible de vérifier utilisateur'
+                    });
+                });
+        },
+        function (userFound, done) {
+            // l'utilisateur est trouvé 
+            if (userFound) {
+                // on autorise la mise à jour des informations
+                userFound.update({
+                        username: (username ? username : userFound.username),
+                        email: (email ? email : userFound.email),
+                        department: (department ? department : userFound.department),
+                    })
+                    .then(function () {
+
+                        done(userFound);
+                    })
+                    .catch(function (err) {
+                        res.status(500).json({
+                            error: 'Mise à jour impossible'
+                        });
+                    })
+            } else {
+                res.status(404).json({
+                    error: 'Utilisateur introuvable'
+                });
+            }
+        }
+    ], function (userFound) {
+        if (userFound) {
+            return res.status(201).json({
+                message: 'Profil mis à jour!'
+            });
+        } else {
+            return res.status(500).json({
+                error: 'Mise à jour impossible'
+            });
+        }
+    })
+};
+
+// -------- GET ONE -------- //
+exports.getOneUser = (req, res, next) => {
+    models.User.findOne({
+            _id: req.params.id
+        })
+        .then((user) => {
+            res.status(200).json(user)
+        })
+        .catch((error) => {
+            res.status(404).json({
+                error
+            })
+        });
+}
+
+
+
+// -------- GET ALL -------- //
+exports.getAllUser = (req, res, next) => {
+    models.User.findAll()
+        .then((users) => {
+            res.status(200).json(users)
+        })
+        .catch((error) => {
+            res.status(404).json({
+                error
+            })
+        });
 };
