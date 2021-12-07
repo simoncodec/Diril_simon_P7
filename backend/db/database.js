@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('groupomania_test', 'root', 'rose', {
+const sequelize = new Sequelize('groupomania', 'root', 'rose', {
     dialect: 'mysql'
 });
 
@@ -9,15 +9,6 @@ sequelize.authenticate().then(() => {
 }).catch((err) => {
     console.log("erreur lors de la connection !");
 });
-
-
-
-
-
-
-
-
-
 
 
 

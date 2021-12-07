@@ -9,21 +9,23 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       email: {
-        type: Sequelize.STRING,
         allowNull: false,
+        type: Sequelize.STRING
       },
       username: {
-        type: Sequelize.STRING,
         allowNull: false,
+        type: Sequelize.STRING
       },
       password: {
-        type: Sequelize.STRING,
         allowNull: false,
+        type: Sequelize.STRING
       },
-      isAdmin: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        default: 0
+      departement: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      isAdmin: {allowNull: false,
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
