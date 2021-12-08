@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 });
 
 //La route d'authentification
-app.use("/api/signup", userRoutes);
+app.use('/api/auth', userRoutes);
 
 
 // exportation de app.js pour pouvoir y acceder depuis un autre fichier

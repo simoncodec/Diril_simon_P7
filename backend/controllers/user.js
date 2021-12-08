@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const asyncLib = require('async');
 const { Model } = require("sequelize/dist");
 const models = require('../models');
+require('dotenv').config();
 
 // import de constante pour vérification de l'email
 const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
