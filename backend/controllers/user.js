@@ -146,12 +146,11 @@ exports.login = (req, res, next) => {
                             department: user.department,
                             isAdmin: user.isAdmin,
                         },
-                        token: jwt.sign({
-                                userId: user.id
-                            },
-                            process.env.DB_TOKEN, {
-                                expiresIn: '12h'
-                            }
+                        userId: user._id,
+                        token: jwt.sign(
+                          { userId: user._id },
+                          'RANDOM_TOKEN_SECRET',
+                          { expiresIn: '24h' }
                         )
                     });
                 })
@@ -256,4 +255,18 @@ exports.getAllUser = (req, res, next) => {
                 error
             })
         });
+};
+
+exports.deleteUser = async (req, res, next) => {
+    models.User.destroy({
+            where: {
+                id: res.locals.userId
+            },
+        })
+        .then(() => res.status(200).json({
+            message: "Utilisateur supprimé"
+        }))
+        .catch((error) => res.status(400).json({
+            error
+        }));
 };

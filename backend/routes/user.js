@@ -15,10 +15,11 @@ router.post('/signup', userController.signup);
 //la route login
 router.post('/login', userController.login);
 
+
 router.get('/', userController.getAllUser);
 router.get('/:id', userController.getOneUser);
 router.put('/:id', auth, userController.updateUser);
-//router.delete('/:id', auth, userController.deleteUser);
+router.delete('/:id', auth, userController.deleteUser);
 
 
 // exportation du modules

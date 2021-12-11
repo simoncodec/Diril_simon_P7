@@ -2,21 +2,21 @@
   "development": {
     "username": "root",
     "password": "rose",
-    "database": "groupomania",
+    "database": "groupomania_dev",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "rose",
-    "database": "groupomania",
+    "database": "groupomania_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": "rose",
-    "database": "groupomania",
+    "database": "groupomania_prod",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

@@ -7,7 +7,7 @@ exports.createmessage = (req, res, next) => {
 
     // création du post
     models.Post.create({
-            UserId: res.locals.userId,
+            UserId: userFound.id,
             content: req.body.content,
             attachment: attachment,
         })
