@@ -4,7 +4,7 @@ const express = require("express");
 //importation du controller/user.js
 const userController = require("../controllers/user");
 //importattion des du midlleware auth
-const auth = require('../middleware/auth');
+//const auth = require('../middleware/auth');
 
 // la fonction router
 const router = express.Router();
@@ -18,8 +18,8 @@ router.post('/login', userController.login);
 
 router.get('/', userController.getAllUser);
 router.get('/:id', userController.getOneUser);
-router.put('/:id', auth, userController.updateUser);
-router.delete('/:id', auth, userController.deleteUser);
+router.put('/:id', userController.updateUser);
+router.delete('/:id', userController.deleteUser);
 
 
 // exportation du modules

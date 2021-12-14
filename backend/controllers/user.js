@@ -230,7 +230,9 @@ exports.updateUser = async (req, res, next) => {
 // -------- GET ONE -------- //
 exports.getOneUser = (req, res, next) => {
     models.User.findOne({
-            _id: req.params.id
+        where: {
+            id: req.params.id
+        },
         })
         .then((user) => {
             res.status(200).json(user)
@@ -260,13 +262,13 @@ exports.getAllUser = (req, res, next) => {
 exports.deleteUser = async (req, res, next) => {
     models.User.destroy({
             where: {
-                id: res.locals.userId
+                id: req.params.id
             },
         })
         .then(() => res.status(200).json({
             message: "Utilisateur supprimé"
         }))
         .catch((error) => res.status(400).json({
-            error
+            message: "non ca na pas fonctionnée"
         }));
 };
