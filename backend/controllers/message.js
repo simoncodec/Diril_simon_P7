@@ -24,7 +24,7 @@ exports.createmessage = (req, res, next) => {
 // -------- LISTE DE TOUS LES POSTS -------- //
 exports.getAllPost = (req, res, next) => {
     const order = req.query.order;
-    models.Post.findAll({
+    models.Message.findAll({
             order: [order != null ? order.split(":") : ["createdAt", "DESC"]],
             include: [{
                 model: models.User,
@@ -39,7 +39,7 @@ exports.getAllPost = (req, res, next) => {
 
 // -------- DELETE -------- //
 exports.deletePost = (req, res, next) => {
-    models.Post.destroy({
+    models.Message.destroy({
             where: {
                 id: req.params.id,
             }
