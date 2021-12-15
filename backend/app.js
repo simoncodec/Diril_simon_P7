@@ -4,6 +4,9 @@ const express = require("express");
 // importation de morgan (logger http)
 const morgan = require("morgan");
 
+// utilisation de path pour accéder au chemins des fichiers
+const path = require("path");
+
 //connection a la base de donné
 const db = require('./db/database')
 
@@ -39,6 +42,9 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
+
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 //La route d'authentification
 app.use('/api/auth', userRoutes);
