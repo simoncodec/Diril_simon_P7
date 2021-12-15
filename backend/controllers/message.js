@@ -6,10 +6,12 @@ exports.createmessage = (req, res, next) => {
     const attachment = req.file ? `${req.protocol}://${req.get("host")}/image/${req.file.filename}`:'';
 
     // création du post
+    console.log(attachment)
     models.Message.create({
-            UserId: res.locals.userId, 
+            UserId: res.locals.userId,
             content: req.body.content,
-            attachment: attachment,
+            attachement: attachment,
+            likes : 0,
         })
         .then(() => res.status(201).json({
             message: "Post créé"

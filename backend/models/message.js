@@ -20,7 +20,10 @@ module.exports = (sequelize, DataTypes) => {
   };
   Message.init({
     content: DataTypes.STRING,
-    attachement: DataTypes.STRING,
+    attachement: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     likes: DataTypes.INTEGER
   }, {
     sequelize,

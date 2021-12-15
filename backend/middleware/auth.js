@@ -5,8 +5,9 @@ module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
     // vérifie que le token est identique
-    const decodedToken = jwt.verify(token, process.env.DB_TOKEN);
+    const decodedToken = jwt.verify(token,"RANDOM_TOKEN_SECRET");
     // on conserve le token donné
+    console.log(decodedToken);
     const userId = decodedToken.userId;
     res.locals.userId = userId;
     // si différent du sauvegardé, une erreur est envoyé
