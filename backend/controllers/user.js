@@ -260,6 +260,7 @@ exports.getAllUser = (req, res, next) => {
 };
 
 exports.deleteUser = async (req, res, next) => {
+    console.log("ok")
     models.User.destroy({
             where: {
                 id: req.params.id

@@ -16,6 +16,7 @@ const bodyparser = require("body-parser");
 // importation des routes
 const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/messages");
+const commentRoutes = require("./routes/comments");
 
 
 
@@ -49,6 +50,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 //La route d'authentification
 app.use('/api/auth', userRoutes);
 app.use('/api/messages', postRoutes);
+app.use('/api/messages/:postId/comments', commentRoutes);
 
 
 // exportation de app.js pour pouvoir y acceder depuis un autre fichier
