@@ -10,6 +10,7 @@ module.exports = (req, res, next) => {
     console.log(decodedToken);
     const userId = decodedToken.userId;
     res.locals.userId = userId;
+    res.locals.isAdmin = decodedToken.isAdmin;
     // si différent du sauvegardé, une erreur est envoyé
     if (req.body.id && req.body.id !== userId) {
       throw 'ID non valide';
