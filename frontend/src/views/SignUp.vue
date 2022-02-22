@@ -1,21 +1,30 @@
 <template>
-  <div class="signup">
+  <div class="home">
+    <img alt="logo groupomania" src="../assets/icon2.png" />
     <SignupForm />
-    <Footer />
+
+    <p class="loginLink">Vous avez déjà un compte? <router-link to="/" class="routerLink">Connectez-vous</router-link></p>
+
   </div>
 </template>
 
 <script>
-import SignupForm from "@/components/SignupForm.vue";
-import Footer from "@/components/Footer.vue";
+import SignupForm from "@/components/SignupForm.vue"
 export default {
   name: 'Signup',
   components: {
     SignupForm,
-    Footer,
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.home {
+  text-align: center;
+}
+img {
+    height: 100px;
+    width: 100px;
+  }
+
 </style>

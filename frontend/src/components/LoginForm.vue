@@ -1,26 +1,50 @@
 <template>
   <div class="login">
-      <v-form v-model="valid">
-        <v-container><v-row>
+    <v-form v-model="valid">
+      <v-container
+        ><v-row>
           <v-col cols="12" md="4">
             <v-text-field
-              v-model="password" :rules="passwordRule" :counter="10" label="Last name" required>
+              v-model="password"
+              :rules="passwordRule"
+              :counter="10"
+              label="password"
+              required
+            >
             </v-text-field>
           </v-col>
 
           <v-col cols="12" md="4">
             <v-text-field
-              v-model="email" :rules="emailRules" label="E-mail" required>
+              v-model="email"
+              :rules="emailRules"
+              label="E-mail"
+              required
+            >
             </v-text-field>
-          </v-col>
-        </v-row></v-container>
-      </v-form>
+          </v-col> </v-row
+      ></v-container>
+    </v-form>
+    <v-btn class="btn" :disabled="!valid" @click="login"> connection </v-btn>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'LoginForm',
+  data: () => ({
+    email: "",
+    password: "",
+    valid: false,
+  }),
+  methods: {
+    login() {
+      fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify({ email: this.email, password: this.password }),
+        headers: { "Content-Type": "application/json" },
+      });
+    },
+  },
 };
 </script>
 
