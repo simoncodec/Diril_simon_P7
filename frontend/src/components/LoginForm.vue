@@ -37,11 +37,17 @@ export default {
   }),
   methods: {
     login() {
-      fetch("http://localhost:3000/api/auth/login", {
+      const request = {
         method: "POST",
-        body: JSON.stringify({ email: this.email, password: this.password }),
         headers: { "Content-Type": "application/json" },
-      });
+        body: JSON.stringify(this.user),
+      };
+      fetch("http://localhost:3000/api/auth/login", request)
+        .then((response) => response.json())
+        .then((data) => {
+          this.$store.commit('LOGIN', data)
+          this.$router.push('Wall');
+        });
     },
   },
 };
