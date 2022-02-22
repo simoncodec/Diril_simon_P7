@@ -7,7 +7,7 @@
     
     <LoginForm />
 
-    <p class="signupLink">Vous n'avez pas de compte? <router-link to="/signup" class="routerLink">Inscrivez-vous</router-link></p>
+    <p class="signupLink">Vous n'avez pas de compte ? <router-link to="/signup" class="routerLink">Inscrivez-vous</router-link></p>
     
   </div>
 </template>

@@ -4,8 +4,8 @@
       <v-container>
           <v-col>
             <v-text-field
-              v-model="password"
-              :rules="passwordRule"
+              v-model="username"
+              :rules="usernameRule"
               :counter="40"
               label="Nom d'utilisateur"
               required
@@ -26,8 +26,8 @@
 
           <v-col>
             <v-text-field
-              v-model="password"
-              :rules="passwordRule"
+              v-model="email"
+              :rules="emailRules"
               :counter="40"
               label="E-mail"
               required
@@ -37,8 +37,8 @@
 
           <v-col>
             <v-text-field
-              v-model="email"
-              :rules="emailRules"
+              v-model="departement"
+              :rules="departementRules"
               label="Departement"
               required
             >
@@ -46,12 +46,30 @@
           </v-col>
       </v-container>
     </v-form>
-    <v-btn class="btn" disabled="!valid" @click="login">connection</v-btn>
+    <v-btn class="btn" :disabled="!valid" @click="signup">connection</v-btn>
 
   </div>
 </template>
 
 <script>
+export default {
+  data: () => ({
+    username: "",
+    password: "",
+    email: "",
+    departement: "",
+    valid: false,
+  }),
+    methods: {
+    signup() {
+      fetch("http://localhost:3000/api/auth/signup", {
+        method: "POST",
+        body: JSON.stringify({ email: this.email, password: this.password, username: this.username, departement: this.departement }),
+        headers: { "Content-Type": "application/json" },
+      });
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -59,4 +77,8 @@
 {
   text-align: center;
 }
+
+.btn {
+    margin: 10px;
+  }
 </style>
