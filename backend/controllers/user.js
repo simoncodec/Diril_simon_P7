@@ -48,11 +48,11 @@ exports.signup = async (req, res, next) => {
         // done car aucun argument - fonction de callback
         function (done) {
             models.User.findOne({
-                    attributes: ['email'],
-                    where: {
-                        email: email
-                    }
-                })
+                attributes: ['email'],
+                where: {
+                    email: email
+                }
+            })
                 //userFound est le paramètre nécessaire à la fonction suivant 
                 .then(function (userFound) {
                     done(null, userFound);
@@ -84,12 +84,12 @@ exports.signup = async (req, res, next) => {
         function (userFound, bcryptedPassword, done) {
             // on utilise le modele User pour création
             let newUser = models.User.create({
-                    email: email,
-                    username: username,
-                    departement: departement,
-                    password: bcryptedPassword,
-                    isAdmin: 0
-                })
+                email: email,
+                username: username,
+                departement: departement,
+                password: bcryptedPassword,
+                isAdmin: 0
+            })
                 // on ne renvoie alors que le paramètre newUser car seul paramètre nécessaire
                 .then(function (newUser) {
                     // pas de paramètre null car waterfall terminée
@@ -122,10 +122,10 @@ exports.signup = async (req, res, next) => {
 // -------- LOGIN -------- //
 exports.login = (req, res, next) => {
     models.User.findOne({
-            where: {
-                email: req.body.email
-            }
-        })
+        where: {
+            email: req.body.email
+        }
+    })
         .then(user => {
             if (!user) {
                 return res.status(401).json({
@@ -148,9 +148,9 @@ exports.login = (req, res, next) => {
                         },
                         //userId: user._id,
                         token: jwt.sign(
-                          { userId: user.id, isAdmin : user.isAdmin },
-                          'RANDOM_TOKEN_SECRET',
-                          { expiresIn: '24h' }
+                            { userId: user.id, isAdmin: user.isAdmin },
+                            'RANDOM_TOKEN_SECRET',
+                            { expiresIn: '24h' }
                         )
                     });
                 })
@@ -174,12 +174,12 @@ exports.updateUser = async (req, res, next) => {
         // récupération de l'utilisateur dans la database
         function (done) {
             models.User.findOne({
-                    // where récupère les insfos de l'user
-                    attributes: ['id'],
-                    where: {
-                        id: req.params.id
-                    }
-                })
+                // where récupère les insfos de l'user
+                attributes: ['id'],
+                where: {
+                    id: req.params.id
+                }
+            })
                 .then(function (userFound) {
                     // l'utilisateur est retourné, on passe à la fonction suivante
                     done(null, userFound);
@@ -195,10 +195,10 @@ exports.updateUser = async (req, res, next) => {
             if (userFound) {
                 // on autorise la mise à jour des informations
                 userFound.update({
-                        username: (username ? username : userFound.username),
-                        email: (email ? email : userFound.email),
-                        department: (department ? department : userFound.department),
-                    })
+                    username: (username ? username : userFound.username),
+                    email: (email ? email : userFound.email),
+                    department: (department ? department : userFound.department),
+                })
                     .then(function () {
 
                         done(userFound);
@@ -233,7 +233,7 @@ exports.getOneUser = (req, res, next) => {
         where: {
             id: req.params.id
         },
-        })
+    })
         .then((user) => {
             res.status(200).json(user)
         })
@@ -262,10 +262,10 @@ exports.getAllUser = (req, res, next) => {
 exports.deleteUser = async (req, res, next) => {
     console.log("ok")
     models.User.destroy({
-            where: {
-                id: req.params.id
-            },
-        })
+        where: {
+            id: req.params.id
+        },
+    })
         .then(() => res.status(200).json({
             message: "Utilisateur supprimé"
         }))
