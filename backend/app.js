@@ -1,6 +1,6 @@
 //importattion de express
 const express = require("express");
-
+const cors = require("cors");
 // importation de morgan (logger http)
 const morgan = require("morgan");
 
@@ -20,9 +20,10 @@ const commentRoutes = require("./routes/comments");
 
 
 
+
 // pour crée une application express
 const app = express();
-
+app.use(cors());
 // permet de verifier les requetes et le temps necessaire sur le terminal (option)
 app.use(morgan("dev"));
 
