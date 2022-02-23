@@ -1,19 +1,20 @@
 <template>
-    <div class="wall">
-    <div class="component">
-      <Navbar />
-      <CreatePost />
-    </div>
-  <div class="container-card">
-    <div v-for="post in posts" :key="post.id">
-      {{ post.content }}
-    </div>
+  <div class="wall">
+     <NavBar />
+    <v-card outlined class="posts">
+      <div v-for="post in posts" :key="post.id">
+        <v-card-text>{{ post.content }}</v-card-text>
+      </div>
+    </v-card>
   </div>
-    </div>
 </template>
 
 <script>
+import NavBar from "@/components/NavBar.vue";
 export default {
+  components: {
+    NavBar,
+  },
   data: () => ({
     posts: [],
   }),
@@ -29,5 +30,11 @@ export default {
 </script>
 
 <style scoped>
-
+.wall {
+  margin: 3%;
+}
+.posts {
+  margin-top: 3%;
+  padding: 3%
+}
 </style>

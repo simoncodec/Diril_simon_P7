@@ -31,6 +31,24 @@ const routes = [
     component: () => import('../views/Wall.vue'),
     beforeEach: isLogged,
   },
+  {
+    path: '/myProfile',
+    name: 'UserProfil',
+    component: () => import('../views/UserProfil.vue'),
+    beforeEach: isLogged,
+  },
+  {
+    path: '/AllProfile',
+    name: 'AllProfile',
+    component: () => import('../views/AllProfile.vue'),
+    beforeEach: isLogged,
+  },
+  {
+    path: '/comments/:PostId',
+    name: 'Comments',
+    component: () => import('../views/Comments.vue'),
+    beforeEach: isLogged,
+  },
 ]
 
 const router = new VueRouter({
