@@ -13,9 +13,7 @@ exports.createmessage = (req, res, next) => {
             attachement: attachment,
             likes : 0,
         })
-        .then(() => res.status(201).json({
-            message: "Post créé"
-        }))
+        .then((messsage) => res.status(201).json(messsage))
         .catch((error) => res.status(400).json({
             error
         }));

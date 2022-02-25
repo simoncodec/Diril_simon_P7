@@ -27,14 +27,6 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item>
-            <v-list-item-icon>
-              <router-link to="/AllProfile" class="navLink"><v-icon>mdi-account-group</v-icon></router-link>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <router-link to="/AllProfile" class="navLink"><v-list-item-title>Tous les profils</v-list-item-title></router-link>
-            </v-list-item-content>
-          </v-list-item>
 
           <v-list-item>
             <v-list-item-icon>

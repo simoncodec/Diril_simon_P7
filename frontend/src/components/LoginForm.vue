@@ -24,29 +24,38 @@
         </v-col>
       </v-container>
     </v-form>
-    <v-btn class="btn" :disabled="!valid" @click="login"> connection </v-btn>
+   <v-btn class="btnLogin" @click="login"> Me connecter </v-btn>
   </div>
 </template>
 
 <script>
 export default {
-  data: () => ({
-    email: "",
-    password: "",
-    valid: false,
-  }),
+	name: 'login',
+  data(){
+    return {
+      user:{
+        email: "",
+        password: "",
+        valid: false,
+      },
+    };
+  },
   methods: {
     login() {
-      fetch("http://localhost:3000/api/auth/login", {
+      const request = {
         method: "POST",
-        body: JSON.stringify({ email: this.email, password: this.password }),
         headers: { "Content-Type": "application/json" },
-      });
-      this.$store.commit('LOGIN')
-      this.$router.push('Wall');
+        body: JSON.stringify({ email: this.email, password: this.password }),
+      };
+      fetch("http://localhost:3000/api/auth/login", request)
+        .then((response) => response.json())
+        .then((data) => {
+          this.$store.commit('LOGIN', data)
+          this.$router.push('Wall');
+        });
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -145,6 +145,7 @@ exports.login = (req, res, next) => {
                             email: user.email,
                             department: user.department,
                             isAdmin: user.isAdmin,
+                            id: user.id,
                         },
                         //userId: user._id,
                         token: jwt.sign(
@@ -259,7 +260,7 @@ exports.getAllUser = (req, res, next) => {
         });
 };
 
-exports.deleteUser = async (req, res, next) => {
+exports.deleteUser =  (req, res, next) => {
     console.log("ok")
     models.User.destroy({
         where: {
@@ -270,6 +271,6 @@ exports.deleteUser = async (req, res, next) => {
             message: "Utilisateur supprimé"
         }))
         .catch((error) => res.status(400).json({
-            message: "non ca na pas fonctionnée"
+            message: error
         }));
 };

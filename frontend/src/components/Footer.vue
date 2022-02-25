@@ -17,10 +17,7 @@ export default {
 
 <style lang="scss" scoped>
 .footer {
-position:absolute;
-bottom:0;
-width:100%;
-height:70px;
+  background-color: #ea8685;
   ul {
     display: flex;
     flex-direction: row;

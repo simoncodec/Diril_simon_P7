@@ -38,12 +38,6 @@ const routes = [
     beforeEach: isLogged,
   },
   {
-    path: '/AllProfile',
-    name: 'AllProfile',
-    component: () => import('../views/AllProfile.vue'),
-    beforeEach: isLogged,
-  },
-  {
     path: '/comments/:PostId',
     name: 'Comments',
     component: () => import('../views/Comments.vue'),
