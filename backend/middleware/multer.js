@@ -14,7 +14,9 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, callback) => {
         // création d'un nom pour l'image 
+        console.log("1")
         const name = file.originalname.split(' ').join('_');
+        console.log("2")
         const extension = MIME_TYPES[file.mimetype];
         callback(null, name + Date.now() + '.' + extension);
     }
@@ -22,4 +24,4 @@ const storage = multer.diskStorage({
 
 module.exports = multer({
     storage: storage
-}).single('attachment');
+}).single('attachement');

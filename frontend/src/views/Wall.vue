@@ -5,7 +5,9 @@
     <v-card outlined class="posts">
       <div v-for="post in posts" :key="post.id">
         <v-card-text>{{ post.content }}</v-card-text>
+        <v-img :src="post.attachement"></v-img>
       </div>
+
     </v-card>
   </div>
 </template>
