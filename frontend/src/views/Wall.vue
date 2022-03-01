@@ -6,6 +6,7 @@
       <div v-for="post in posts" :key="post.id">
         <v-card-text>{{ post.content }}</v-card-text>
         <v-img :src="post.attachement"></v-img>
+         <p class="h6"><v-icon>mdi-account</v-icon> {{ post.User.username }}</p>
          <v-icon class="btnAction" v-if="getUser.username == post.User.username || getUser.isAdmin" @click="deletePost(post.id, index)">mdi-trash-can-outline</v-icon>
       </div>
 
