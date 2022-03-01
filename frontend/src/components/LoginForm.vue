@@ -17,6 +17,7 @@
             v-model="password"
             :rules="passwordRule"
             :counter="10"
+            type= "password" 
             label="Mots de passe"
             required
           >
@@ -50,6 +51,7 @@ export default {
       fetch("http://localhost:3000/api/auth/login", request)
         .then((response) => response.json())
         .then((data) => {
+          console.log(data)
           this.$store.commit('LOGIN', data)
           this.$router.push('Wall');
         });

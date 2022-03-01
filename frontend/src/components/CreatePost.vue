@@ -3,7 +3,6 @@
     <v-container>
       <v-textarea
         v-model="posts.content"
-        :rules="contentRules"
         class="content"
         color="black"
         label="Quoi de neuf...?"
@@ -43,7 +42,7 @@ export default {
       const request = {
         method: "POST",
         headers: {
-          authorization: "Bearer " + this.$store.getters.getToken,
+          authorization: "Bearer " + this.$store.state.token,
         },
         body: newPost,
       };
